@@ -98,7 +98,7 @@ require_once('./../db_config.php');
           <div class="col-12 text-center mt-5">
             <button class="btn btn-secondary px-5 py-2"><a href="./../profile/">Cancel</a></button>
             <button type="submit" class="btn btn-primary px-5 py-2">Confirm</button>
-            </div>
+          </div>
         </form>
       </div>
   </main>

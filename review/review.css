@@ -10,170 +10,172 @@ font-family: 'Poppins', sans-serif;
  */
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-	margin: 0px;
-	font-family: "Alata", sans-serif;
+  margin: 0px;
+  font-family: "Alata", sans-serif;
 }
 
 .title {
-	font-family: 'Alata', sans-serif;
-	font-weight: bold;
-	color: #7868e6;
+  font-family: 'Alata', sans-serif;
+  font-weight: bold;
+  color: #7868e6;
 }
 
 .text {
-	font-family: 'Popins', sans-serif;
-	font-weight: 600;
-	font-size: 16px;
-	color: #373640;
+  font-family: 'Popins', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #373640;
 }
-.text-muted{
-	font-size: 14px;
-	padding: 0;
-	margin: 0;
+
+.text-muted {
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
 }
 
 .name {
-	font-family: 'Alata', sans-serif;
-	color: #7868e6;
-	font-size: 30px;
+  font-family: 'Alata', sans-serif;
+  color: #7868e6;
+  font-size: 30px;
 }
 
 
 /* header */
 .main-header {
-	width: 100%;
-	background: #c8c7fa;
-	padding: 16px 16px;
+  width: 100%;
+  background: #c8c7fa;
+  padding: 16px 16px;
 }
 
 .main-header>div {
-	display: inline-block;
+  display: inline-block;
 }
 
 .main-header-logo {
-	color: #7868e6;
-	font-weight: bold;
-	text-decoration: none;
+  color: #7868e6;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .main-header-logo:hover {
-	color: #bd4738;
+  color: #bd4738;
 }
 
 .main-nav {
-	display: inline-block;
-	text-align: right;
-	width: calc(100% - 150px);
+  display: inline-block;
+  text-align: right;
+  width: calc(100% - 150px);
 }
 
 .main-nav__items {
-	padding: 0;
-	margin: 0;
-	list-style: none;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .main-nav__item {
-	display: inline-block;
-	color: azure;
-	margin: 0 20px;
+  display: inline-block;
+  color: azure;
+  margin: 0 20px;
 }
 
 .main-nav__item a {
-	color: rgb(63, 35, 129);
-	text-decoration: none;
+  color: rgb(63, 35, 129);
+  text-decoration: none;
 }
 
 .main-nav__item a:hover {
-	color: azure;
+  color: azure;
 }
 
 .nav-logout a {
-	color: azure;
-	background: #7868e6;
-	padding: 8px 16px;
-	border-radius: 2px;
+  color: azure;
+  background: #7868e6;
+  padding: 8px 16px;
+  border-radius: 2px;
 }
 
 .nav-logout a:hover {
-	color: #7868e6;
-	background: azure;
+  color: #7868e6;
+  background: azure;
 }
 
 .btn-primary {
-	background: #7868e6;
-	border: 1px solid #7868e6;
+  background: #7868e6;
+  border: 1px solid #7868e6;
 }
 
 .btn-primary:hover,
 .btn-primary:active {
-	background: #fdfaf6;
-	color: #7868e6;
-	border: 1px solid #7868e6;
+  background: #fdfaf6;
+  color: #7868e6;
+  border: 1px solid #7868e6;
 }
 
 /* Update Profile */
 .update-heading {
-	color: #7868e6;
-	text-align: center;
-	font-family: 'Popins', sans-serif;
-	font-weight: 600;
+  color: #7868e6;
+  text-align: center;
+  font-family: 'Popins', sans-serif;
+  font-weight: 600;
 }
 
 .update-form {
-	font-family: 'Popins', sans-serif;
+  font-family: 'Popins', sans-serif;
 }
 
 /* Review section */
-.review-card{
-	padding: 0;
-	margin: 0;
-	background: #d3e0dc;
-}
-.review-dp{
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
+.review-card {
+  padding: 0;
+  margin: 0;
+  background: #d3e0dc;
 }
 
-.review-article{
-	font-family: 'Popins', sans-serif;
-	font-size: 16px;
-	font-weight: normal;
-	margin: 5px 16px;
-	padding: 5px;
-
+.review-dp {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
 
-.review-title{
-	font-family: inherit;
-	font-size: 24px;
-	color: #222831;
+.review-article {
+  font-family: 'Popins', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 5px 16px;
+  padding: 5px;
 
 }
 
-.review-username{
-	font-family: 'Popins', sans-serif;
-	font-size: 12px;
-	color: rgb(77, 74, 74);
-	margin: 0;
-	padding: 0;
+.review-title {
+  font-family: inherit;
+  font-size: 24px;
+  color: #222831;
 
 }
 
-.review-date{
-	padding: 0;
-	margin: 0;
+.review-username {
+  font-family: 'Popins', sans-serif;
+  font-size: 12px;
+  color: rgb(77, 74, 74);
+  margin: 0;
+  padding: 0;
+
+}
+
+.review-date {
+  padding: 0;
+  margin: 0;
 }
 
 /* footer */
 .footer {
-	color: #222831;
-	font-size: 14px;
-	font-family: 'Popins', sans-serif;
-	height: 100%;
-	margin-top: 50px;
+  color: #222831;
+  font-size: 14px;
+  font-family: 'Popins', sans-serif;
+  height: 100%;
+  margin-top: 50px;
 }
