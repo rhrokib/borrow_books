@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Poppins:wght@400;600&display=swap');
+/* 
+font-family: 'Alata', sans-serif;
+font-family: 'Poppins', sans-serif;
+#c8c7fa light
+#7868e6 bold
+#222831 black
+#fdfaf6 white
+ */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0px;
+	font-family: "Alata", sans-serif;
+}
+
+.title {
+	font-family: 'Alata', sans-serif;
+	font-weight: bold;
+	color: #7868e6;
+}
+
+.text {
+	font-family: 'Popins', sans-serif;
+	font-weight: 600;
+	font-size: 16px;
+	color: #373640;
+}
+
+.name {
+	font-family: 'Alata', sans-serif;
+	color: #7868e6;
+	font-size: 30px;
+}
+
+
+/* header */
+.main-header {
+	width: 100%;
+	background: #c8c7fa;
+	padding: 16px 16px;
+}
+
+.main-header>div {
+	display: inline-block;
+}
+
+.main-header-logo {
+	color: #7868e6;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.main-header-logo:hover {
+	color: #bd4738;
+}
+
+.main-nav {
+	display: inline-block;
+	text-align: right;
+	width: calc(100% - 150px);
+}
+
+.main-nav__items {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.main-nav__item {
+	display: inline-block;
+	color: azure;
+	margin: 0 20px;
+}
+
+.main-nav__item a {
+	color: rgb(63, 35, 129);
+	text-decoration: none;
+}
+
+.main-nav__item a:hover {
+	color: azure;
+}
+
+.nav-logout a {
+	color: azure;
+	background: #7868e6;
+	padding: 8px 16px;
+	border-radius: 2px;
+}
+
+.nav-logout a:hover {
+	color: #7868e6;
+	background: azure;
+}
+
+.btn-primary {
+	background: #7868e6;
+	border: 1px solid #7868e6;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+	background: #fdfaf6;
+	color: #7868e6;
+	border: 1px solid #7868e6;
+}
+
+.btn-secondary a{
+	text-decoration: none;
+	color: #fdfaf6;
+}
+
+
+.info-name,
+.info-detail{
+	padding: 3px;
+}
+
+
+/* footer */
+.footer {
+	color: #222831;
+	font-size: 14px;
+	font-family: 'Popins', sans-serif;
+	margin-top: -30px;
+	height: 30px;
+
+}
+
+/* homeless */
+.homeless {
+	font-family: 'Alata', sans-serif;
+	font-weight: 400;
+	font-size: 20px;
+	color: #222831;
+}
+
+.home-title {
+	font-size: 200px;
+}
