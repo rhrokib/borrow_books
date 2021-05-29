@@ -1,6 +1,32 @@
 <?php
 require_once('./../db_config.php');
 ?>
+<?php
+/*This part is hardcoded for now because
+  my teammate is working on these things.
+*/
+session_start();
+$_SESSION['username'] = 'asteroidX'; //temp
+
+$username = $_SESSION['username'];
+
+$retObj = $pdo->query("SELECT * FROM user where username = '$username'");
+
+$profile = $retObj->fetch(PDO::FETCH_ASSOC);
+
+$email = $profile['email'];
+$firstname = $profile['firstname'];
+$lastname = $profile['lastname'];
+$phone = $profile['phone'];
+$location = $profile['location'];
+$city = $profile['city'];
+
+$totalCredit = $profile['totalCredit'];
+$totalRead = $profile['totalRead'];
+$totalGiven = $profile['totalGiven'];
+$rating = $profile['rating'];
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,10 +65,10 @@ require_once('./../db_config.php');
         <div class="col-md-4 text-center">
           <img src="./DP.jpg" alt="" class="img-fluid img-thumbnail rounded border border-3" width="250px">
           <div class="profile-name">
-            <h1 class="name">Roqibul Islam</h1>
+            <h1 class="name"><?php echo $firstname." ".$lastname; ?></h1>
           </div>
-          <p class="username">@AsteroidX</p>
-          <p>Total Credit: 592 MC</p>
+          <p class="username"><?php echo $username; ?> </p>
+          <p>Total Credit: <?php echo $totalCredit; ?> BC</p>
           <a href="./update_profile.php"><button class="btn btn-primary">Update Profile</button></a>
 
 
@@ -63,13 +89,13 @@ require_once('./../db_config.php');
                 <p class="info-name">Rating :</p>
               </div>
               <div class="col-md-9 info-detail px-5">
-                <p class="info-detail">rokib.hridoy@gmail.com</p>
-                <p class="info-detail">01521433870</p>
-                <p class="info-detail">H35, R02, Know-where</p>
-                <p class="info-detail">Not Dhaka, Pluto</p>
-                <p class="info-detail">21</p>
-                <p class="info-detail">8</p>
-                <p class="info-detail">4.67</p>
+                <p class="info-detail"><?php echo $email; ?></p>
+                <p class="info-detail"><?php echo $phone; ?></p>
+                <p class="info-detail"><?php echo $location; ?></p>
+                <p class="info-detail"><?php echo $city; ?></p>
+                <p class="info-detail"><?php echo $totalRead; ?></p>
+                <p class="info-detail"><?php echo $totalGiven; ?></p>
+                <p class="info-detail"><?php echo $rating; ?></p>
               </div>
             </div>
           </div>

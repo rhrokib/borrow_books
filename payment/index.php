@@ -38,7 +38,7 @@ require_once('./../db_config.php');
     <section>
       <div class="container pb-5">
         <div>
-          <h1 class="title text-center m-3">Mobile Coin</h1>
+          <h1 class="title text-center m-3">Book Coin</h1>
         </div>
         <article class='plan justify-content-center'>
           <h1>Eco</h1>
