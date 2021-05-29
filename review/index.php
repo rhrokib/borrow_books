@@ -88,7 +88,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
                       <h1 class="review-title"><?php echo $post['title']; ?></h1>
                       <?php
                       $isbn = $post['isbn'];
-                      $retObj = $pdo->query("SELECT name, author, time FROM book where isbn = $isbn");
+                      $retObj = $pdo->query("SELECT name, author, time FROM book where isbn = '$isbn'");
                       $row = $retObj->fetch();
                       $name = $row['name'];
                       $author = $row['author'];
@@ -101,12 +101,15 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
                       <small class="text-muted mt-3"> | Date: TBA</small>
                     </div>
                     <div class="col-md-1 review-date">
-                    <?php
-                      if($username == $p_uname){
-                    ?>
-                      <a href=""><button class="btn btn-primary px-3 py-2 mt-2">Update</button></a>
                       <?php
-                      } 
+                      if ($username == $p_uname) {
+                      ?>
+                        <form action="./update.php" method="post">
+                        <input type="hidden" name="id", value="<?php echo $post['id']; ?>"></input>
+                        <button type="submit" class="btn btn-primary px-3 py-2 mt-2">Update</button>
+                        </form>
+                      <?php
+                      }
                       ?>
                     </div>
                     <p class="review-article px-3"><?php echo $post['description']; ?></p>

@@ -3,12 +3,9 @@ require_once('./../db_config.php');
 session_start();
 
 if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
-?>
-  <script>
-    location.assign("./../index.php");
-  </script> // currently redirecting to Home.
-  <?php
+  redirect("./../index.php", NULL);
 } else {
+  $alert = "?alert=danger";
   if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET['amount']) && !empty($_GET['amount'])) {
       $amount_ = $_GET['amount'];
@@ -18,27 +15,30 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
       $profile = $retObj->fetch(PDO::FETCH_ASSOC);
       $totalCredit = $profile['totalCredit'];
       $totalCredit += $amount_;
-      echo $totalCredit;
 
       try {
         $pdo->exec("UPDATE user SET totalCredit = $totalCredit WHERE username = '$username'");
-        $alert = "success";
+        $alert = "?alert=success";
         echo "omg";
-  ?>
-        <script>
-          location.assign("./?alert=<?php echo $alert ?>");
-        </script>
-      <?php
+        redirect("./", $alert);
 
       } catch (PDOException $e) {
-        $alert = 'danger';
-        echo "danger"
-      ?>
-        <script>
-          location.assign("./?alert=<?php echo $alert ?>");
-        </script>
-<?php
+        $alert = "?alert=danger";
+        echo "danger";
+        redirect("./", $alert);
       }
     }
   }
 }
+?>
+
+<?php
+function redirect($to, $alert)
+{
+?>
+  <script>
+    location.assign("<?php echo $to.$alert ?>");
+  </script>
+<?php
+}
+?>

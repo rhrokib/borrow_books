@@ -12,6 +12,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
     $title = $_POST['review-title'];
     $description = $_POST['review-text'];
     $rating = $_POST['review-rating'];
+    $id = $_POST['id'];
 
     try {
       $retObj = $pdo->query("SELECT name, author FROM book WHERE isbn = '$isbn'");
@@ -24,21 +25,27 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
       $book_name = $book['name'];
       $book_author = $book['author'];
 
-      $sql_query = "INSERT INTO post VALUES (NULL,'$title', '$description', '$rating', '$isbn', '$username');";
+      $sql_query = "UPDATE post 
+                    SET
+                     title = '$title', 
+                     description = '$description',
+                     loved = $rating,
+                     isbn = '$isbn'
+                     WHERE id = $id;";
 
       try {
-        $pdo->exec($sql_query);
+        $pdo->query($sql_query);
         $alert = "?alert=success";
         redirect("./index.php", $alert);
       } catch (PDOException $e) {
         $alert = '?alert=danger';
-        redirect("./create.php", $alert);
+        redirect("./index1.php", $alert.$id);
       }
     } catch (PDOException $e) {
-      redirect("./create.php", $alert);
+      redirect("./index2.php", $alert);
     }
   } else {
-    redirect("./create.php", $alert);
+    redirect("./index3.php", $alert);
   }
 }
 ?>

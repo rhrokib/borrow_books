@@ -3,13 +3,9 @@ require_once('./../db_config.php');
 session_start();
 
 if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
-?>
-  <script>
-    location.assign("./../index.php");
-  </script> // currently redirecting to Home.
-<?php
+  redirect("./../index.php", NULL);
 } else {
-
+  $alert = '?alert=danger';
   $username = $_SESSION['username'];
 
   $retObj = $pdo->query("SELECT * FROM user where username = '$username'");
@@ -62,20 +58,20 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
     </header>
     <main>
       <div class="container">
-      <?php
-        if(isset($_GET['alert']) && !empty($_GET['alert'])){
-          if($_GET['alert'] == 'danger'){
+        <?php
+        if (isset($_GET['alert']) && !empty($_GET['alert'])) {
+          if ($_GET['alert'] == 'danger') {
             $msg = 'Something went wrong! Please try again. Make sure you enter valid inputs.';
-          } else{
+          } else {
             $msg = 'Your profile has been updated';
           }
-          ?>
-          <div class="alert mt-2 text-center alert-<?php echo $_GET['alert']?>" role="alert">
+        ?>
+          <div class="alert mt-2 text-center alert-<?php echo $_GET['alert'] ?>" role="alert">
             <?php echo $msg ?>
           </div>
-          <?php
+        <?php
         }
-      ?>
+        ?>
         <h1 class="text-center title mt-3">Update Profile</h1>
         <div class="container-sm">
           <!-- Input divs -->
@@ -156,10 +152,10 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
   </body>
 
   </html>
+
+
   <!-- All the validation and processing -->
-
-
-  <?php
+<?php
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $u_fName = $_POST['fName'];
     $u_lName = $_POST['lName'];
@@ -169,26 +165,25 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
     $u_city = $_POST['city'];
     $curPass = $_POST['curPass'];
 
-    $alert = "danger";
+    $alert = '?alert=danger';
 
     if (isset($_FILES['pp']) && !empty($_FILES['pp'])) { //if new file id uploaded
       $image = $_FILES['pp'];
       $image_name = $image['name'];
       $tmp_path = $image['tmp_name'];
       $to_upload = "./../media/profile_picture/$image_name";
-      move_uploaded_file($tmp_path,$to_upload);
-
     } else {
-      $to_upload = $profile['pp']; // otherwise same as before
+      $to_upload = $profile['dp_path']; // otherwise same as before
     }
 
     if (
-      isset($_POST['newPass']) && isset($_POST['newPass']) &&
-      !empty($_POST['newPass1']) && !empty($_POST['newPass1'])
+      isset($_POST['newPass']) && isset($_POST['newPass1']) &&
+      !empty($_POST['newPass']) && !empty($_POST['newPass1'])
     ) {
       $newPass = $_POST['newPass'];
       $newPass1 = $_POST['newPass1'];
-      if ($newPass == $newPass1) {
+      $flag = false;
+      if ($newPass === $newPass1) {
         $flag = true;
       }
     }
@@ -215,45 +210,40 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
           try {
             $pdo->exec("UPDATE user SET password = '$newPass' WHERE username = '$username'");
           } catch (PDOException $e) {
-  ?>
-            <script>
-              location.assign("./update_profile.php?alert=<?php echo $alert ?>");
-            </script>
-          <?php
+            $alert = '?alert=danger';
+            redirect("./update_profile.php", $alert);
           }
         }
 
         try {
           $pdo->exec($sql_query);
-          $alert = "success";
-
-          ?>
-          <script>
-            location.assign("./update_profile.php?alert=<?php echo $alert ?>");
-          </script>
-          <?php
-
+          move_uploaded_file($tmp_path, $to_upload);
+          $alert = '?alert=success';
+          redirect("./", $alert);
         } catch (PDOException $e) {
-          ?>
-          <script>
-            location.assign("./update_profile.php?alert=<?php echo $alert ?>");
-          </script>
-        <?php
+          $alert = '?alert=danger';
+          redirect("./update_profile.php", $alert);
         }
       } else {
-        ?>
-        <script>
-          location.assign("./update_profile.php?alert=<?php echo $alert ?>");
-        </script>
-        <?php
+        $alert = '?alert=danger';
+        redirect("./update_profile.php", $alert);
       }
     } else {
-      ?>
-      <script>
-        location.assign("./update_profile.php?alert=<?php echo $alert ?>");
-      </script>
-      <?php
+      $alert = '?alert=danger';
+      redirect("./update_profile.php", $alert);
     }
   }
+}
+?>
+
+//custom redirect function
+<?php
+function redirect($to, $alert)
+{
+?>
+  <script>
+    location.assign("<?php echo $to . $alert ?>");
+  </script>
+<?php
 }
 ?>
