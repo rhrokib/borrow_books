@@ -127,7 +127,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
             </div>
             <div class="col-12 text-center">
               <input type="hidden" name="id" value="<?php echo $post_id; ?>"></input>
-              <button type="submit" class="btn btn-primary text-center">Post Review</button>
+              <button type="submit" class="btn btn-primary text-center">Update Review</button>
             </div>
           </form>
         </div>
