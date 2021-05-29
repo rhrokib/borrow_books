@@ -1,10 +1,8 @@
 <?php
 require_once('./../db_config.php');
 session_start();
-echo $_SESSION['username'];
 
-
-if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
+if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
 ?>
   <script>
     location.assign("./../index.php");
@@ -64,6 +62,20 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
     </header>
     <main>
       <div class="container">
+      <?php
+        if(isset($_GET['alert']) && !empty($_GET['alert'])){
+          if($_GET['alert'] == 'danger'){
+            $msg = 'Something went wrong! Please try again. Make sure you enter valid inputs.';
+          } else{
+            $msg = 'Your profile has been updated';
+          }
+          ?>
+          <div class="alert mt-2 text-center alert-<?php echo $_GET['alert']?>" role="alert">
+            <?php echo $msg ?>
+          </div>
+          <?php
+        }
+      ?>
         <h1 class="text-center title mt-3">Update Profile</h1>
         <div class="container-sm">
           <!-- Input divs -->
@@ -123,7 +135,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
               <!-- New DP -->
               <div class="col-md-12">
                 <label class="form-label" for="pp">New Picture</label>
-                <input type="file" class="form-control" id="dp_path" name="dp_path">
+                <input type="file" class="form-control" id="pp" name="pp">
               </div>
 
               <div class="col-12 text-center mt-5">
@@ -157,10 +169,17 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
     $u_city = $_POST['city'];
     $curPass = $_POST['curPass'];
 
-    if (isset($_FILES['dp_path']) && !empty($_FILES['dp_path'])) { //if new file id uploaded
-      $dp_path = $_FILES['dp_path'];
+    $alert = "danger";
+
+    if (isset($_FILES['pp']) && !empty($_FILES['pp'])) { //if new file id uploaded
+      $image = $_FILES['pp'];
+      $image_name = $image['name'];
+      $tmp_path = $image['tmp_name'];
+      $to_upload = "./../media/profile_picture/$image_name";
+      move_uploaded_file($tmp_path,$to_upload);
+
     } else {
-      $dp_path = $profile['dp_path']; // otherwise same as before
+      $to_upload = $profile['pp']; // otherwise same as before
     }
 
     if (
@@ -179,17 +198,61 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
       !empty($u_email) && !empty($curPass) // other fields can be NULL
     ) {
       if ($profile['password'] == $curPass) {
-        echo "seems good";
-        echo $dp_path['tmp_name'];
-      } else {
+        // all operations here
+        $sql_query =
+          "UPDATE user
+          SET
+            firstname = '$u_fName',
+            lastname = '$u_lName',
+            email = '$u_email',
+            phone = '$u_phone',
+            `location` = '$u_addr',
+            city = '$u_city',
+            dp_path = '$to_upload'
+          WHERE username = '$username';";
+
+        if ($flag) {
+          try {
+            $pdo->exec("UPDATE user SET password = '$newPass' WHERE username = '$username'");
+          } catch (PDOException $e) {
   ?>
+            <script>
+              location.assign("./update_profile.php?alert=<?php echo $alert ?>");
+            </script>
+          <?php
+          }
+        }
+
+        try {
+          $pdo->exec($sql_query);
+          $alert = "success";
+
+          ?>
+          <script>
+            location.assign("./update_profile.php?alert=<?php echo $alert ?>");
+          </script>
+          <?php
+
+        } catch (PDOException $e) {
+          ?>
+          <script>
+            location.assign("./update_profile.php?alert=<?php echo $alert ?>");
+          </script>
+        <?php
+        }
+      } else {
+        ?>
         <script>
-          location.assign("./update_profile.php");
+          location.assign("./update_profile.php?alert=<?php echo $alert ?>");
         </script>
-<?php
+        <?php
       }
     } else {
-      echo $totalCredit;
+      ?>
+      <script>
+        location.assign("./update_profile.php?alert=<?php echo $alert ?>");
+      </script>
+      <?php
     }
   }
 }

@@ -73,12 +73,15 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
             <?php
           } else {
             foreach ($posts as $post) {
+              $p_uname = $post['username'];
+              $retObj = $pdo->query("SELECT dp_path from user WHERE username = '$p_uname'");
+              $profile = $retObj->fetch(PDO::FETCH_ASSOC);
             ?>
               <div class="col-md-12">
                 <div class="card card-primary review-card my-3 p-3">
                   <div class="row g-2">
                     <div class="col-md-1 text-center">
-                      <img class="img-responsive review-dp pl-4" src="./../profile/DP.jpg" alt="">
+                      <img class="img-responsive review-dp pl-4" src="<?php echo $profile['dp_path']; ?>" alt="">
                       <p><small class="review-username">@<?php echo $post['username']; ?></small></p>
                     </div>
                     <div class="col-md-10">
@@ -95,11 +98,18 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
                       <small class="text-muted pr-3">Author: <?php echo $author; ?></small>
                       <br>
                       <small class="text-muted pr-3">Rating: <?php echo $post['loved']; ?></small>
+                      <small class="text-muted mt-3"> | Date: TBA</small>
                     </div>
                     <div class="col-md-1 review-date">
-                      <small class="text-muted">Date: TBA</small>
+                    <?php
+                      if($username == $p_uname){
+                    ?>
+                      <a href=""><button class="btn btn-primary px-3 py-2 mt-2">Update</button></a>
+                      <?php
+                      } 
+                      ?>
                     </div>
-                    <p class="review-article"><?php echo $post['description']; ?></p>
+                    <p class="review-article px-3"><?php echo $post['description']; ?></p>
                   </div>
                 </div>
               </div>

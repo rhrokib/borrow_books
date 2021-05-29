@@ -46,18 +46,22 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
       <div class="container">
 
         <h1 class="text-center title m-2">Book Review</h1>
-        <form action="./../review/index.php">
+        <form action="./../review/review_process.php" method="post">
           <div class="row g-2 mt-3 ">
             <div class="col-md-4">
               <div class="card p-3 mt-3">
                 <div class="form-group px-2">
                   <div class="form-group mb-3">
-                    <label for="review-title mb-2">Book Name</label>
-                    <input type="text" class="form-control mt-2" id="review-title" name="review-title" rows="1"></input>
+                    <label for="review-book mb-2">Book Name</label>
+                    <input type="text" class="form-control mt-2" id="review-book" name="review-book" rows="1"></input>
                   </div>
                   <div class="form-group mb-3">
                     <label for="review-title mb-2">Author</label>
-                    <input type="text" class="form-control mt-2" id="review-title" name="review-title" rows="1"></input>
+                    <input type="text" class="form-control mt-2" id="review-author" name="review-author" rows="1"></input>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="review-title mb-2">ISBN</label>
+                    <input type="text" class="form-control mt-2" id="review-isbn" name="review-isbn" rows="1" required></input>
                   </div>
                   <!-- Rating -->
                   <label for="book-rating mb-3">My Rating</label>

@@ -25,6 +25,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
 
     <title>Profile</title>
   </head>
+
   <body>
     <!-- Navigation -->
     <header class='main-header'>
@@ -44,60 +45,80 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
 
     <!-- Main -->
     <main>
+      <?php
+      if (isset($_GET['alert']) && !empty($_GET['alert'])) {
+        if ($_GET['alert'] == 'danger') {
+          $msg = 'Something went wrong! Please try again. Make sure you enter valid inputs.';
+        } else {
+          $msg = 'Payment Successful';
+        }
+      ?>
+        <div class="alert mt-2 text-center alert-<?php echo $_GET['alert'] ?>" role="alert">
+          <?php echo $msg ?>
+        </div>
+      <?php
+      }
+      ?>
       <section>
-        <div class="container pb-5">
-          <div>
-            <h1 class="title text-center m-3">Book Coin</h1>
-          </div>
-          <article class='plan justify-content-center'>
-            <h1>Eco</h1>
-            <h2>৳ 100</h2>
-            <h3>For Students and Starter</h3>
-            <ul class='plan__features'>
-              <li>105 Book Coin</li>
-              <li>5+ Books</li>
-              <li>You save 5%</li>
-            </ul>
+        <form action="./payment_process.php" method="post">
+          <div class="container pb-5">
             <div>
-              <a href="./payment_process.php"><button class='btn btn-success'>CHOOSE PLAN</button></a>
+              <h1 class="title text-center m-3">Book Coin</h1>
             </div>
-          </article>
-          <article class='plan plan__highlighted'>
-            <h1 class='plan__annotation'>RECOMMENDED</h1>
-            <h1>Power Plus</h1>
-            <h2>৳ 1000</h2>
-            <h3>For daily reader.</h3>
-            <ul class='plan__features'>
-              <li>1200 Book Coin</li>
-              <li>60 Books</li>
-              <li>You save 20%</li>
-            </ul>
-            <div>
-              <a href="./payment_process.php"><button class='btn btn-primary'>CHOOSE PLAN</button></a>
-            </div>
-          </article class='plan'>
-          <article class='plan'>
-            <h1>Regular</h1>
-            <h2>৳ 500</h2>
-            <h3>For regular reader</h3>
-            <ul class='plan__features'>
-              <li>650 Book Coin</li>
-              <li>11 Books</li>
-              <li>You save 10%</li>
-            </ul>
-            <div>
-              <a href="./payment_process.php"><button class='btn btn-success'>CHOOSE PLAN</button></a>
-            </div>
-          </article>
-        </div>
-      </section>
 
-      <!-- Footer -->
-      <footer>
-        <div class="container mt-5">
-          <h5 class="text-center footer">© Borrow Books</h5>
-        </div>
-      </footer>
+            <article class='plan justify-content-center'>
+              <h1>Eco</h1>
+              <h2>৳ 100</h2>
+              <h3>For Students and Starter</h3>
+              <ul class='plan__features'>
+                <li>105 Book Coin</li>
+                <li>5+ Books</li>
+                <li>You save 5%</li>
+              </ul>
+              <div>
+                <a href="./payment_process.php"><button type="submit" class='btn btn-success' name="eco" value="100">CHOOSE PLAN</button></a>
+              </div>
+            </article>
+
+            <article class='plan plan__highlighted'>
+              <h1 class='plan__annotation'>RECOMMENDED</h1>
+              <h1>Power Plus</h1>
+              <h2>৳ 1000</h2>
+              <h3>For daily reader.</h3>
+              <ul class='plan__features'>
+                <li>1200 Book Coin</li>
+                <li>60 Books</li>
+                <li>You save 20%</li>
+              </ul>
+              <div>
+                <a href="./payment_process.php"><button type="submit" class='btn btn-primary' name="power" value="1000">CHOOSE PLAN</button></a>
+              </div>
+            </article class='plan'>
+
+            <article class='plan'>
+              <h1>Regular</h1>
+              <h2>৳ 500</h2>
+              <h3>For regular reader</h3>
+              <ul class='plan__features'>
+                <li>650 Book Coin</li>
+                <li>11 Books</li>
+                <li>You save 10%</li>
+              </ul>
+              <div>
+                <a href="./payment_process.php"><button type="submit" class='btn btn-success' name="regular" value="500">CHOOSE PLAN</button></a>
+              </div>
+            </article>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container mt-5">
+        <h5 class="text-center footer">© Borrow Books</h5>
+      </div>
+    </footer>
 
   </body>
 

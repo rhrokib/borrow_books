@@ -21,6 +21,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
   $phone = $profile['phone'];
   $location = $profile['location'];
   $city = $profile['city'];
+  $dp = $profile['dp_path'];
 
   $totalCredit = $profile['totalCredit'];
   $totalRead = $profile['totalRead'];
@@ -65,11 +66,11 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
       <div class="container">
         <div class="row g-2 mt-3 ">
           <div class="col-md-4 text-center">
-            <img src="./DP.jpg" alt="" class="img-fluid img-thumbnail rounded border border-3" width="250px">
+            <img src="<?php echo $dp?>" alt="" class="img-fluid img-thumbnail rounded border border-3" width="250px">
             <div class="profile-name">
               <h1 class="name"><?php echo $firstname . " " . $lastname; ?></h1>
             </div>
-            <p class="username"><?php echo $username; ?> </p>
+            <p class="username">@<?php echo $username; ?> </p>
             <p>Total Credit: <?php echo $totalCredit; ?> BC</p>
             <a href="./update_profile.php"><button class="btn btn-primary">Update Profile</button></a>
 

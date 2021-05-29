@@ -7,9 +7,25 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
   <script>
     location.assign("./../index.php");
   </script> // currently redirecting to Home.
-<?php
+  <?php
 } else {
-?>
+  $amount = 0;
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['eco']) && !empty($_POST['eco'])) {
+      $amount = $_POST['eco'];
+    } else if (isset($_POST['power']) && !empty($_POST['power'])) {
+      $amount = $_POST['power'];
+    } else if (isset($_POST['regular']) && !empty($_POST['regular'])) {
+      $amount = $_POST['regular'];
+    } else {
+  ?>
+      <script>
+        location.assign("./../payment");
+      </script>
+  <?php
+    }
+  }
+  ?>
 
   <!DOCTYPE html>
   <html lang="en">
@@ -46,7 +62,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
     <!-- Main -->
     <div class="container mt-3">
       <h1 class="title text-center mb-3">Complete Payment</h1>
-      <form action="./payment_process.php" class="row gt-2">
+      <form action="./payment_done.php" method="GET" enctype="multipart/form-data">
         <div class="input-group mb-3">
           <label class="input-group-text" for="payment-method">Select Method</label>
           <select class="form-select" id="payment-method" , name="payment-method">
@@ -59,18 +75,18 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
 
         <div class="input-group mb-3">
           <span class="input-group-text">Account No.</span>
-          <input type="text" aria-label="Acc No" class="form-control">
+          <input type="text" aria-label="Acc No" class="form-control" autocomplete="off">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">Amount</span>
-          <input type="text" aria-label="Acc No" class="form-control" disabled>
+          <input type="text" aria-label="Acc No" class="form-control" value="<?php echo $amount; ?>" name="amount">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">Pin No</span>
           <input type="password" aria-label="Acc No" class="form-control">
         </div>
         <div class="col-12 text-center">
-          <button class="btn btn-secondary px-5 py-2"><a href="./../payment/">Cancel</a></button>
+          <p class="btn btn-secondary px-5 py-2 mt-3"><a href="./../payment/">Cancel</a></p>
           <button type="submit" class="btn btn-primary px-5 py-2">Confirm</button>
         </div>
 
@@ -83,10 +99,10 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
         <h5 class="text-center footer">© Borrow Books</h5>
       </div>
     </footer>
-
   </body>
 
   </html>
-<?php
+
+  <?php
 }
 ?>

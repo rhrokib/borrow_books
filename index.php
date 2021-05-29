@@ -1,6 +1,7 @@
 <?php
 require_once('./db_config.php');
 session_start();
+echo $_GET['alert'];
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +54,7 @@ session_start();
 		<div class="container mt-5 text-center p-5">
 			<p class="text-muted text-center">Demo login as:</p>
 			<button class="btn btn-success mx-3 py-3 px-5" onclick="login('asteroidX');">asteroidX</button>
-			<button class="btn btn-danger mx-3 py-3 px-5" onclick="login('I_Hate_PHP')">I_Hate_PHP</button>
+			<button class="btn btn-danger mx-3 py-3 px-5" onclick="login('I_hate_PHP')">I_Hate_PHP</button>
 
 		</div>
 	</main>
