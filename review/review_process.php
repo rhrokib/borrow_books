@@ -3,11 +3,7 @@ require_once('./../db_config.php');
 session_start();
 
 if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
-?>
-  <script>
-    location.assign("./../index.php");
-  </script> // currently redirecting to Home.
-  <?php
+  redirect("./../index.php", "");
 } else {
   $username = $_SESSION['username'];
   $alert = "?alert=danger";
@@ -20,8 +16,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
     try {
       $retObj = $pdo->query("SELECT name, author FROM book WHERE isbn = '$isbn'");
 
-      if($retObj->rowCount() == 0){
-
+      if ($retObj->rowCount() == 0) {
       }
 
       $book = $retObj->fetch(PDO::FETCH_ASSOC);
@@ -33,48 +28,28 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
       try {
         $pdo->exec($sql_query);
         $alert = "?alert=success";
-        ?>
-          <script>
-            location.assign("./index.php?alert=<?php echo $alert ?>");
-          </script>
-        <?php
-
+        redirect("./index.php", $alert);
       } catch (PDOException $e) {
         $alert = '?alert=danger';
-      ?>
-        <script>
-          location.assign("./index.php?alert=<?php echo $alert ?>");
-        </script>
-      <?php
-
+        redirect("./create.php", $alert);
       }
     } catch (PDOException $e) {
-      ?>
-      <script>
-        location.assign("./index.php?alert=<?php echo $alert ?>");
-      </script>
-    <?php
+      redirect("./create.php", $alert);
     }
   } else {
-    ?>
-    <script>
-      location.assign("./update_profile.php?alert=<?php echo $alert ?>");
-    </script>
-<?php
+    redirect("./create.php", $alert);
   }
 }
 
 ?>
 
 <?php
-function redirect($to, $alert){
-  ?>
-    <script>
-      location.assign("<?php $to.$alert ?>");
-    </script>
-  <?php
-
+function redirect($to, $alert)
+{
+?>
+  <script>
+    location.assign("<?php $to . $alert ?>");
+  </script>
+<?php
 }
-
-
 ?>

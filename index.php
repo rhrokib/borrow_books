@@ -1,7 +1,6 @@
 <?php
 require_once('./db_config.php');
 session_start();
-echo $_GET['alert'];
 ?>
 
 <!DOCTYPE html>
