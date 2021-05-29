@@ -1,5 +1,6 @@
 <?php
 require_once('./db_config.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +12,7 @@ require_once('./db_config.php');
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 	<link rel="stylesheet" href="./profile/profile.css">
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 
 	<title>Profile</title>
 </head>
@@ -27,7 +29,7 @@ require_once('./db_config.php');
 				<li class="main-nav__item"><a href="./review/">Review</a></li>
 				<li class="main-nav__item"><a href="./payment/">Credit</a></li>
 				<li class="main-nav__item"><a href="./profile/">Profile</a></li>
-				<li class="main-nav__item nav-logout"><a href="#">logout</a></li>
+				<li class="main-nav__item nav-logout"><a href="./demo_logout.php">logout</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -47,6 +49,13 @@ require_once('./db_config.php');
 				<img src="./huc.svg" alt="" width="800px">
 			</div>
 		</div>
+		<!-- Demo login -->
+		<div class="container mt-5 text-center p-5">
+			<p class="text-muted text-center">Demo login as:</p>
+			<button class="btn btn-success mx-3 py-3 px-5" onclick="login('asteroidX');">asteroidX</button>
+			<button class="btn btn-danger mx-3 py-3 px-5" onclick="login('I_Hate_PHP')">I_Hate_PHP</button>
+
+		</div>
 	</main>
 
 	<!-- Footer -->
@@ -54,5 +63,10 @@ require_once('./db_config.php');
 	</footer>
 
 </body>
-
 </html>
+
+<script>
+function login(username){
+	location.assign(`./demo_login.php?username=${username}`)
+}
+</script>

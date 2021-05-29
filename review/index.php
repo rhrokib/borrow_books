@@ -2,10 +2,13 @@
 require_once('./../db_config.php');
 session_start();
 
-if (
-  isset($_SESSION['username'])
-  &&  !empty($_SESSION['username'])
-) {
+if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
+?>
+  <script>
+    location.assign("./../index.php");
+  </script> // currently redirecting to Home.
+<?php
+} else {
 
   $username = $_SESSION['username'];
   $retObj = $pdo->query("SELECT * FROM post");
@@ -22,6 +25,7 @@ if (
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="review.css">
+    <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 
     <title>Profile</title>
   </head>
@@ -38,7 +42,7 @@ if (
           <li class="main-nav__item"><a href="./../review/index.php">Review</a></li>
           <li class="main-nav__item"><a href="./../payment/">Credit</a></li>
           <li class="main-nav__item"><a href="./../profile/">Profile</a></li>
-          <li class="main-nav__item nav-logout"><a href="#">logout</a></li>
+          <li class="main-nav__item nav-logout"><a href="./../demo_logout.php">logout</a></li>
         </ul>
       </nav>
     </header>
@@ -79,13 +83,13 @@ if (
                     </div>
                     <div class="col-md-10">
                       <h1 class="review-title"><?php echo $post['title']; ?></h1>
-                      <?php 
-                        $isbn = $post['isbn'];
-                        $retObj = $pdo->query("SELECT name, author, time FROM book where isbn = $isbn");
-                        $row = $retObj->fetch();
-                        $name = $row['name'];
-                        $author = $row['author'];
-                        $time = $row['time'];
+                      <?php
+                      $isbn = $post['isbn'];
+                      $retObj = $pdo->query("SELECT name, author, time FROM book where isbn = $isbn");
+                      $row = $retObj->fetch();
+                      $name = $row['name'];
+                      $author = $row['author'];
+                      $time = $row['time'];
                       ?>
                       <small class="text-muted pr-3">Book: <?php echo $name; ?> | </small>
                       <small class="text-muted pr-3">Author: <?php echo $author; ?></small>
