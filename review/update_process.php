@@ -10,7 +10,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isbn = $_POST['review-isbn'];
     $title = $_POST['review-title'];
-    $description = $_POST['review-text'];
+    $description = htmlspecialchars($_POST['review-text'],ENT_QUOTES);
     $rating = $_POST['review-rating'];
     $id = $_POST['id'];
 
