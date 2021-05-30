@@ -6,10 +6,12 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
   redirect("./../index.php", NULL);
 } else {
   $alert = "?alert=danger";
-  if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if (isset($_GET['amount']) && !empty($_GET['amount'])) {
-      $amount_ = $_GET['amount'];
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['amount']) && !empty($_POST['amount'])) {
+      $amount_ = $_POST['amount'];
       $username = $_SESSION['username'];
+      $method = $_POST['payment-method'];
+    
 
       $retObj = $pdo->query("SELECT totalCredit FROM user where username = '$username'");
       $profile = $retObj->fetch(PDO::FETCH_ASSOC);
@@ -17,9 +19,9 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
       $totalCredit += $amount_;
 
       try {
+        $pdo->exec("INSERT INTO payment VALUES(NULL, $amount_, '$method', now(), 1,'$username');");
         $pdo->exec("UPDATE user SET totalCredit = $totalCredit WHERE username = '$username'");
         $alert = "?alert=success";
-        echo "omg";
         redirect("./", $alert);
 
       } catch (PDOException $e) {

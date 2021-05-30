@@ -62,7 +62,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
     <!-- Main -->
     <div class="container mt-3">
       <h1 class="title text-center mb-3">Complete Payment</h1>
-      <form action="./payment_done.php" method="GET" enctype="multipart/form-data">
+      <form action="./payment_done.php" method="POST" enctype="multipart/form-data">
         <div class="input-group mb-3">
           <label class="input-group-text" for="payment-method">Select Method</label>
           <select class="form-select" id="payment-method" , name="payment-method">

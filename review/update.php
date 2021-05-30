@@ -17,7 +17,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
 
       $post = $retObj->fetch(PDO::FETCH_ASSOC);
       $post_title = $post['title'];
-      $post_description = $post['description'];
+      $post_description = $post['description_text'];
       
       $post_loved = $post['loved'];
       $post_isbn = $post['isbn'];

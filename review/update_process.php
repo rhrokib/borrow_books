@@ -28,7 +28,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
       $sql_query = "UPDATE post 
                     SET
                      title = '$title', 
-                     description = <<< EOL $description EOL,
+                     description_text = '$description',
                      loved = $rating,
                      isbn = '$isbn'
                      WHERE id = $id;";
@@ -39,8 +39,8 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
         redirect("./index.php", $alert);
       } catch (PDOException $e) {
         $alert = '?alert=danger';
-        $alert =$e->getMessage();
-        redirect("./index.php", $alert);
+        $alert = "?alert=".$e->getMessage();
+        redirect("./../index.php", $alert);
       }
     } catch (PDOException $e) {
       redirect("./index.php", $alert);

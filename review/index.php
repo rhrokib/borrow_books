@@ -112,7 +112,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
                       }
                       ?>
                     </div>
-                    <p class="review-article px-3"><?php echo $post['description']; ?></p>
+                    <p class="review-article px-3"><?php echo $post['description_text']; ?></p>
                   </div>
                 </div>
               </div>

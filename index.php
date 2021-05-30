@@ -36,6 +36,22 @@ session_start();
 
 	<!-- Main -->
 	<main>
+		<div class="container mb-3">
+		<?php
+        if (isset($_GET['alert']) && !empty($_GET['alert'])) {
+          if ($_GET['alert'] == 'danger') {
+            $msg = $_GET['alert'];
+          } else {
+            $msg = $_GET['alert'];
+          }
+        ?>
+          <div class="alert mt-2 text-center alert-<?php echo $_GET['alert'] ?>" role="alert">
+            <?php echo $msg ?>
+          </div>
+        <?php
+        }
+        ?>
+		</div>
 		<div class="row g-2 mt-3 ">
 			<div class="col-md-4 mx-5">
 				<div class="container my-5">
@@ -63,10 +79,11 @@ session_start();
 	</footer>
 
 </body>
+
 </html>
 
 <script>
-function login(username){
-	location.assign(`./demo_login.php?username=${username}`)
-}
+	function login(username) {
+		location.assign(`./demo_login.php?username=${username}`)
+	}
 </script>
