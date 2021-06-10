@@ -1,7 +1,7 @@
 <?php
 require_once('./../db_config.php');
 session_start();
-if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
+if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 ?>
   <script>
     location.assign("./../index.php");
@@ -21,7 +21,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
     <link rel="stylesheet" href="review.css">
     <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 
-    <title>Profile</title>
+    <title>New Review</title>
   </head>
 
   <body>
@@ -45,6 +45,21 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
     <main>
       <div class="container">
 
+        <?php
+        if (isset($_GET['alert']) && !empty($_GET['alert'])) {
+          if ($_GET['alert'] == 'danger') {
+            $msg = 'Something went wrong! Please try again.';
+          } else {
+            $msg = 'Posted Succesfully';
+          }
+        ?>
+          <div class="alert mt-2 text-center alert-<?php echo $_GET['alert'] ?>" role="alert">
+            <?php echo $msg ?>
+          </div>
+        <?php
+        }
+        ?>
+
         <h1 class="text-center title m-2">Book Review</h1>
         <form action="./../review/review_process.php" method="post">
           <div class="row g-2 mt-3 ">
@@ -59,22 +74,17 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
                     <label for="review-title mb-2">Author</label>
                     <input type="text" class="form-control mt-2" id="review-author" name="review-author" rows="1"></input>
                   </div>
-                  <div class="form-group mb-3">
-                    <label for="review-title mb-2">ISBN</label>
-                    <input type="text" class="form-control mt-2" id="review-isbn" name="review-isbn" rows="1" required></input>
-                  </div>
                   <!-- Rating -->
                   <label for="book-rating mb-3">My Rating</label>
                   <!-- Rating -->
                   <div class="input-group mb-3">
                     <label class="input-group-text mt-2" for="review-rating">Options</label>
                     <select class="form-select mt-2" id="review-rating" name="review-rating">
-                      <option value="0" selected>Choose...</option>
                       <option value="1">😡 Hated it</option>
                       <option value="2">😠 Not Bad</option>
                       <option value="3">😕 Confused</option>
                       <option value="4">👍 Liked it</option>
-                      <option value="5">❤️ Loved it</option>
+                      <option value="5" selected>❤️ Loved it</option>
                     </select>
                   </div>
                 </div>

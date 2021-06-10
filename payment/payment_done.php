@@ -2,14 +2,14 @@
 require_once('./../db_config.php');
 session_start();
 
-if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
+if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
   redirect("./../index.php", NULL);
 } else {
   $alert = "?alert=danger";
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['amount']) && !empty($_POST['amount'])) {
       $amount_ = $_POST['amount'];
-      $username = $_SESSION['username'];
+      $username = $_SESSION['user'];
       $method = $_POST['payment-method'];
     
 
@@ -19,7 +19,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
       $totalCredit += $amount_;
 
       try {
-        $pdo->exec("INSERT INTO payment VALUES(NULL, $amount_, '$method', now(), 1,'$username');");
+        $pdo->exec("INSERT INTO payment VALUES(NULL, $amount_, '$method', now(), 'Not Accepted','$username');");
         $pdo->exec("UPDATE user SET totalCredit = $totalCredit WHERE username = '$username'");
         $alert = "?alert=success";
         redirect("./", $alert);

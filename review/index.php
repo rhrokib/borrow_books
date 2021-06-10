@@ -2,7 +2,7 @@
 require_once('./../db_config.php');
 session_start();
 
-if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
+if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 ?>
   <script>
     location.assign("./../index.php");
@@ -10,8 +10,8 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
 <?php
 } else {
 
-  $username = $_SESSION['username'];
-  $retObj = $pdo->query("SELECT * FROM post");
+  $username = $_SESSION['user'];
+  $retObj = $pdo->query("SELECT * FROM post ORDER BY time DESC");
   $posts = $retObj->fetchAll();
 
 ?>
@@ -27,7 +27,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
     <link rel="stylesheet" href="review.css">
     <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 
-    <title>Profile</title>
+    <title>Book Review</title>
   </head>
 
   <body>
@@ -87,26 +87,24 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
                     <div class="col-md-10">
                       <h1 class="review-title"><?php echo $post['title']; ?></h1>
                       <?php
-                      $isbn = $post['isbn'];
-                      $retObj = $pdo->query("SELECT name, author, time FROM book where isbn = '$isbn'");
-                      $row = $retObj->fetch();
-                      $name = $row['name'];
-                      $author = $row['author'];
-                      $time = $row['time'];
+                      $book_name = $post['book_name'];
+                      $book_author = $post['book_author'];
+                      $time = strtotime($post['time']);
+
                       ?>
-                      <small class="text-muted pr-3">Book: <?php echo $name; ?> | </small>
-                      <small class="text-muted pr-3">Author: <?php echo $author; ?></small>
+                      <small class="text-muted pr-3">Book: <?php echo $book_name; ?> | </small>
+                      <small class="text-muted pr-3">Author: <?php echo $book_author; ?></small>
                       <br>
                       <small class="text-muted pr-3">Rating: <?php echo $post['loved']; ?></small>
-                      <small class="text-muted mt-3"> | Date: TBA</small>
+                      <small class="text-muted mt-3"> | <?php echo date('jS F, Y', $time); ?></small>
                     </div>
                     <div class="col-md-1 review-date">
                       <?php
                       if ($username == $p_uname) {
                       ?>
                         <form action="./update.php" method="post">
-                        <input type="hidden" name="id", value="<?php echo $post['id']; ?>"></input>
-                        <button type="submit" class="btn btn-primary px-3 py-2 mt-2">Update</button>
+                          <input type="hidden" name="id" , value="<?php echo $post['id']; ?>"></input>
+                          <button type="submit" class="btn btn-primary px-3 py-2 mt-2">Update</button>
                         </form>
                       <?php
                       }

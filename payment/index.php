@@ -2,7 +2,7 @@
 require_once('./../db_config.php');
 session_start();
 
-if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
+if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 ?>
   <script>
     location.assign("./../index.php");
@@ -23,7 +23,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
     <link rel="stylesheet" href="./payment.css">
     <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
 
-    <title>Profile</title>
+    <title>Choose Plan</title>
   </head>
 
   <body>

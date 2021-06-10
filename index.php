@@ -14,7 +14,7 @@ session_start();
 	<link rel="stylesheet" href="./profile/profile.css">
 	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 
-	<title>Profile</title>
+	<title>Borrow Books</title>
 </head>
 
 <body>
@@ -26,6 +26,7 @@ session_start();
 
 		<nav class="main-nav">
 			<ul class="main-nav__items">
+				<li class="main-nav__item"><a href="./book/book.php">Brinto</a></li>
 				<li class="main-nav__item"><a href="./review/">Review</a></li>
 				<li class="main-nav__item"><a href="./payment/">Credit</a></li>
 				<li class="main-nav__item"><a href="./profile/">Profile</a></li>
@@ -52,16 +53,16 @@ session_start();
         }
         ?>
 		</div>
-		<div class="row g-2 mt-3 ">
+		<div class="row g-2 d-flex justify-center mt-3 ">
 			<div class="col-md-4 mx-5">
 				<div class="container my-5">
 					<h1 class="title home-title">Home?</h1>
 					<p class="homeless">Not everthing is fortunate enough to get a home.</p>
-					<p class="homeless">Perhaps, we'll can build one before the final presentaion.</p>
+					<p class="homeless">Perhaps, we can build one before the final presentaion.</p>
 					<p class="homeless mx-5">- 👷👷 </p>
 				</div>
 			</div>
-			<div class="col-md-6 justify-center">
+			<div class="col-md-6">
 				<img src="./huc.svg" alt="" width="800px">
 			</div>
 		</div>

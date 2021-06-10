@@ -2,11 +2,11 @@
 require_once('./../db_config.php');
 session_start();
 
-if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
+if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
   redirect("./../index.php", NULL);
 } else {
   $alert = '?alert=danger';
-  $username = $_SESSION['username'];
+  $username = $_SESSION['user'];
 
   $retObj = $pdo->query("SELECT * FROM user where username = '$username'");
   $profile = $retObj->fetch(PDO::FETCH_ASSOC);
@@ -75,7 +75,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
         <h1 class="text-center title mt-3">Update Profile</h1>
         <div class="container-sm">
           <!-- Input divs -->
-          <form action="./update_profile.php" method="post" enctype="multipart/form-data">
+          <form action="./update_profile.php" autocomplete="off" method="post" enctype="multipart/form-data">
             <div class="row g-3 mt-3">
               <!-- username -->
               <div class="col-md-12">
@@ -141,6 +141,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
             </div>
           </form>
         </div>
+      </div>
     </main>
 
     <footer>
@@ -167,13 +168,11 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
 
     $alert = '?alert=danger';
 
-    if (isset($_FILES['pp']) && !empty($_FILES['pp'])) { //if new file id uploaded
+    if ($_FILES['pp']['error'] == 0) { //if new file id uploaded
       $image = $_FILES['pp'];
       $image_name = $image['name'];
       $tmp_path = $image['tmp_name'];
       $to_upload = "./../media/profile_picture/$image_name";
-    } else {
-      $to_upload = $profile['dp_path']; // otherwise same as before
     }
 
     if (
@@ -189,12 +188,23 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
     }
 
     if (
-      isset($u_email) && isset($curPass) &&
-      !empty($u_email) && !empty($curPass) // other fields can be NULL
+      isset($_POST['email']) && isset($_POST['curPass']) &&
+      !empty($_POST['email']) && !empty($_POST['email']) // other fields can be NULL
     ) {
-      if ($profile['password'] == $curPass) {
+      if ($profile['password'] == md5($curPass)) {
         // all operations here
         $sql_query =
+          "UPDATE user
+          SET
+            firstname = '$u_fName',
+            lastname = '$u_lName',
+            email = '$u_email',
+            phone = '$u_phone',
+            `location` = '$u_addr',
+            city = '$u_city'
+          WHERE username = '$username';";
+
+        $sql_query_image =
           "UPDATE user
           SET
             firstname = '$u_fName',
@@ -208,7 +218,8 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
 
         if ($flag) {
           try {
-            $pdo->exec("UPDATE user SET password = '$newPass' WHERE username = '$username'");
+            $np = md5($newPass);
+            $pdo->exec("UPDATE user SET password = '$np' WHERE username = '$username'");
           } catch (PDOException $e) {
             $alert = '?alert=danger';
             redirect("./update_profile.php", $alert);
@@ -216,10 +227,16 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
         }
 
         try {
-          $pdo->exec($sql_query);
-          move_uploaded_file($tmp_path, $to_upload);
-          $alert = '?alert=success';
-          redirect("./", $alert);
+          if ($_FILES['pp']) {
+            $pdo->exec($sql_query_image);
+            move_uploaded_file($tmp_path, $to_upload);
+            $alert = '?alert=success';
+            redirect("./", $alert);
+          } else {
+            $pdo->exec($sql_query);
+            $alert = '?alert=success';
+            redirect("./", $alert);
+          }
         } catch (PDOException $e) {
           $alert = '?alert=danger';
           redirect("./update_profile.php", $alert);
@@ -236,7 +253,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
 }
 ?>
 
-//custom redirect function
+
 <?php
 function redirect($to, $alert)
 {

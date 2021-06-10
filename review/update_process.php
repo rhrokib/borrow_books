@@ -2,35 +2,27 @@
 require_once('./../db_config.php');
 session_start();
 
-if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
+if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
   redirect("./../index.php",NULL);
 } else {
-  $username = $_SESSION['username'];
+  $username = $_SESSION['user'];
   $alert = "?alert=danger";
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $isbn = $_POST['review-isbn'];
     $title = $_POST['review-title'];
     $description = htmlspecialchars($_POST['review-text'],ENT_QUOTES);
     $rating = $_POST['review-rating'];
     $id = $_POST['id'];
+    $book_name = htmlspecialchars($_POST['review-book'],ENT_QUOTES);
+    $book_author = htmlspecialchars($_POST['review-author'],ENT_QUOTES);
 
     try {
-      $retObj = $pdo->query("SELECT name, author FROM book WHERE isbn = '$isbn'");
-
-      if ($retObj->rowCount() == 0) {
-        redirect("./index.php", $alert);
-      }
-
-      $book = $retObj->fetch(PDO::FETCH_ASSOC);
-      $book_name = $book['name'];
-      $book_author = $book['author'];
-
       $sql_query = "UPDATE post 
                     SET
                      title = '$title', 
                      description_text = '$description',
                      loved = $rating,
-                     isbn = '$isbn'
+                     book_name = '$book_name',
+                     book_author = '$book_author'
                      WHERE id = $id;";
 
       try {
@@ -51,7 +43,6 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['username'])) {
   redirect("./index.php", $alert);
 }
 ?>
-what's wrong!
 <!-- custom redirect function -->
 <?php
 function redirect($to, $alert)

@@ -1,0 +1,18 @@
+body{
+  font-family: sans-serif;
+}
+
+
+
+.my-sidebar{
+  background: #293b5f;
+  min-height: 100vh;
+  position: relative;
+}
+
+.my-navbar{
+  background: #c8c7fa !important;
+}
+.nav-link{
+  color: #333 !important;
+}

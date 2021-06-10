@@ -1,7 +1,7 @@
 <?php
 require_once('./../db_config.php');
 session_start();
-if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
+if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 ?>
   <script>
     location.assign("./../index.php");
@@ -9,7 +9,7 @@ if (!isset($_SESSION['username']) &&  empty($_SESSION['userename'])) {
 <?php
 } else {
 
-  $username = $_SESSION['username'];
+  $username = $_SESSION['user'];
 
   $retObj = $pdo->query("SELECT * FROM user where username = '$username'");
 

@@ -9,7 +9,7 @@ easier.
 <?php
 $username = $_GET['username'];
 session_start();
-$_SESSION['username'] = $username;
+$_SESSION['user'] = $username;
 ?>
 
 <script>
