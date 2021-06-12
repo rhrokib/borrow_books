@@ -1,6 +1,10 @@
 <?php
 require_once('./db_config.php');
 session_start();
+$login = true;
+if (isset($_SESSION['user'])) {
+	$login = false;
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,11 +30,22 @@ session_start();
 
 		<nav class="main-nav">
 			<ul class="main-nav__items">
-				<li class="main-nav__item"><a href="./book/book.php">Brinto</a></li>
+				<li class="main-nav__item"><a href="./book/book.php">Books</a></li>
 				<li class="main-nav__item"><a href="./review/">Review</a></li>
 				<li class="main-nav__item"><a href="./payment/">Credit</a></li>
 				<li class="main-nav__item"><a href="./profile/">Profile</a></li>
-				<li class="main-nav__item nav-logout"><a href="./demo_logout.php">logout</a></li>
+				<?php
+				if ($login) {
+				?>
+					<li class="main-nav__item nav-logout"><a href="./login/login.php">login</a></li>
+				<?php
+				} else {
+				?>
+					<li class="main-nav__item nav-logout"><a href="./logout/logout.php">logout</a></li>
+				<?php
+				}
+				?>
+
 			</ul>
 		</nav>
 	</header>
@@ -38,28 +53,28 @@ session_start();
 	<!-- Main -->
 	<main>
 		<div class="container mb-3">
-		<?php
-        if (isset($_GET['alert']) && !empty($_GET['alert'])) {
-          if ($_GET['alert'] == 'danger') {
-            $msg = $_GET['alert'];
-          } else {
-            $msg = $_GET['alert'];
-          }
-        ?>
-          <div class="alert mt-2 text-center alert-<?php echo $_GET['alert'] ?>" role="alert">
-            <?php echo $msg ?>
-          </div>
-        <?php
-        }
-        ?>
+			<?php
+			if (isset($_GET['alert']) && !empty($_GET['alert'])) {
+				if ($_GET['alert'] == 'danger') {
+					$msg = $_GET['alert'];
+				} else {
+					$msg = $_GET['alert'];
+				}
+			?>
+				<div class="alert mt-2 text-center alert-<?php echo $_GET['alert'] ?>" role="alert">
+					<?php echo $msg ?>
+				</div>
+			<?php
+			}
+			?>
 		</div>
 		<div class="row g-2 d-flex justify-center mt-3 ">
 			<div class="col-md-4 mx-5">
 				<div class="container my-5">
 					<h1 class="title home-title">Home?</h1>
 					<p class="homeless">Not everthing is fortunate enough to get a home.</p>
-					<p class="homeless">Perhaps, we can build one before the final presentaion.</p>
-					<p class="homeless mx-5">- 👷👷 </p>
+					<p class="homeless">Perhaps, we'll be able to build one in future.</p>
+					<p class="homeless mx-3">- 👷👷 </p>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -67,12 +82,6 @@ session_start();
 			</div>
 		</div>
 		<!-- Demo login -->
-		<div class="container mt-5 text-center p-5">
-			<p class="text-muted text-center">Demo login as:</p>
-			<button class="btn btn-success mx-3 py-3 px-5" onclick="login('asteroidX');">asteroidX</button>
-			<button class="btn btn-danger mx-3 py-3 px-5" onclick="login('I_hate_PHP')">I_Hate_PHP</button>
-
-		</div>
 	</main>
 
 	<!-- Footer -->

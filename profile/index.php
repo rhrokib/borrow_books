@@ -4,8 +4,8 @@ session_start();
 if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 ?>
   <script>
-    location.assign("./../index.php");
-  </script> // currently redirecting to Home.
+    location.assign("./../login/login.php");
+  </script>
 <?php
 } else {
 
@@ -53,6 +53,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 
       <nav class="main-nav">
         <ul class="main-nav__items">
+          <li class="main-nav__item"><a href="./../book/book.php">Books</a></li>
           <li class="main-nav__item"><a href="./../review/">Review</a></li>
           <li class="main-nav__item"><a href="./../payment/">Credit</a></li>
           <li class="main-nav__item"><a href="./index.php">Profile</a></li>
@@ -66,7 +67,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
       <div class="container">
         <div class="row g-2 mt-3 ">
           <div class="col-md-4 text-center">
-            <img src="<?php echo $dp?>" alt="" class="img-fluid img-thumbnail rounded border border-3" width="250px">
+            <img src="<?php echo $dp ?>" alt="" class="img-fluid img-thumbnail rounded border border-3" width="250px">
             <div class="profile-name">
               <h1 class="name"><?php echo $firstname . " " . $lastname; ?></h1>
             </div>
@@ -76,7 +77,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 
 
           </div>
-          <div class="col-md-6 mb-5">
+          <div class="col-md-6">
             <div class="card mb-3 rounded border">
               <h1 class="text-center title">My Information</h1>
             </div>
@@ -103,15 +104,16 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
               </div>
             </div>
           </div>
+          <div class="col-md-6 text-center offset-4  mt-3">
+            <a class="btn btn-outline-dark px-5" href="./../my_book/book_view.php">My Books</a>
+            <a class="btn btn-outline-dark px-5" href="./../view_request/view_req.php">My Requests</a>
+          </div>
         </div>
       </div>
     </main>
 
     <!-- Footer -->
     <footer>
-      <div class="container mt-5">
-        <h5 class="text-center footer">© Borrow Books</h5>
-      </div>
     </footer>
 
   </body>

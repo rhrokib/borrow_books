@@ -35,7 +35,7 @@
 	
 	} 
 	if($flag == 1){
-		header('location: ..\book\book.php');
+		header('location: ..\index.php');
 	}
 	else{
 		header('location: ..\login\login.php');

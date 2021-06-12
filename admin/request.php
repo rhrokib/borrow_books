@@ -1,9 +1,8 @@
 <?php
 require_once('./../db_config.php');
 session_start();
-$_SESSION['user'] = "rhrokib";
 
-if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
+if (!isset($_SESSION['admin']) &&  empty($_SESSION['admin'])) {
 ?>
   <script>
     location.assign("./login.php");
@@ -11,7 +10,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 <?php
 } else {
 
-  $username = $_SESSION['user'];
+  $username = $_SESSION['admin'];
   $retObj = $pdo->query("SELECT * FROM request ORDER BY accepted DESC, time DESC");
   $posts = $retObj->fetchAll();
 ?>
@@ -39,7 +38,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
       <nav class="main-nav ">
         <ul class="main-nav__items">
           <li class="main-nav__item text-black-50 ">Admin: <?php echo $username; ?></li>
-          <li class="main-nav__item nav-logout"><a href="./demo_logout.php">logout</a></li>
+          <li class="main-nav__item nav-logout"><a href="./logout.php">logout</a></li>
         </ul>
       </nav>
     </header>

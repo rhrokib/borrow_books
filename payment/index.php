@@ -5,8 +5,8 @@ session_start();
 if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 ?>
   <script>
-    location.assign("./../index.php");
-  </script> // currently redirecting to Home.
+    location.assign("./../login/login.php");
+  </script>
 <?php
 } else {
 ?>
@@ -35,6 +35,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 
       <nav class="main-nav">
         <ul class="main-nav__items">
+        <li class="main-nav__item"><a href="./../book/book.php">Books</a></li>
           <li class="main-nav__item"><a href="./../review/">Review</a></li>
           <li class="main-nav__item"><a href="./">Credit</a></li>
           <li class="main-nav__item"><a href="./../profile/">Profile</a></li>

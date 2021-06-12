@@ -3,7 +3,7 @@ require_once('./../db_config.php');
 session_start();
 
 if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
-  redirect("./../index.php",NULL);
+  redirect("./../login/login.php",NULL);
 } else {
   $username = $_SESSION['user'];
   $alert = "?alert=danger";

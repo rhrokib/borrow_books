@@ -2,7 +2,7 @@
 require_once('./../db_config.php');
 session_start();
 if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
-  redirect("./../index.php", NULL);
+  redirect("./../login/login.php", NULL);
 } else {
   $username = $_SESSION['user'];
   $alert = "?alert=danger";
@@ -52,6 +52,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 
       <nav class="main-nav">
         <ul class="main-nav__items">
+          <li class="main-nav__item"><a href="./../book/book.php">Books</a></li>
           <li class="main-nav__item"><a href="./../review/">Review</a></li>
           <li class="main-nav__item"><a href="./../payment/">Credit</a></li>
           <li class="main-nav__item"><a href="./../profile/">Profile</a></li>

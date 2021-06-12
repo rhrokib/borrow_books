@@ -12,8 +12,9 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 } else {
   $username = $_SESSION['user'];
 
+  $val = $_POST['val'];
   $reviews = new ReviewPost();
-  $posts = $reviews->getSearchResults("");
+  $posts = $reviews->getSearchResults("$val");
 
 ?>
 

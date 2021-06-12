@@ -1,9 +1,8 @@
 <?php
 require_once('./../db_config.php');
 session_start();
-$_SESSION['user'] = "rhrokib";
 
-if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
+if (!isset($_SESSION['admin']) &&  empty($_SESSION['admin'])) {
 ?>
   <script>
     location.assign("./login.php");
@@ -12,7 +11,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 } else {
   try {
     $id = $_GET['id'];
-    $username = $_SESSION['user'];
+    $username = $_SESSION['admin'];
     $pdo->exec("UPDATE request SET accepted = 'Declined' WHERE reqId = '$id';");
     redirect("./request.php", "?alert=success");
   } catch (PDOException $e) {

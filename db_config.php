@@ -1,4 +1,5 @@
 <?php
+global $pdo;
 try{
 $pdo = new PDO('mysql:host=localhost;port=3406;dbname=demo','dbms', 'dbms'); //for my env as I've changed configs
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -2,7 +2,6 @@
 session_start();
 session_destroy();
 ?>
-
 <script>
-location.assign("./")
+  location.assign("./login.php");
 </script>
