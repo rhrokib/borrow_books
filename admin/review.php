@@ -33,7 +33,7 @@ if (!isset($_SESSION['admin']) &&  empty($_SESSION['admin'])) {
   <body>
     <header class='main-header'>
       <div>
-        <a class="main-header-logo" href="./index.php">Borrow Books</a>
+        <a class="main-header-logo" href="#">Borrow Books</a>
       </div>
       <nav class="main-nav ">
         <ul class="main-nav__items">
