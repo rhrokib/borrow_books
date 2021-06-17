@@ -93,6 +93,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
                     </select>
                   </div>
                 </div>
+                <a href="./delete_review.php?id=<?php echo $post_id; ?>" class="btn btn-outline-danger text-center">Delete Review</a>
               </div>
             </div>
 
@@ -112,7 +113,6 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
           <div class="col-12 text-center">
             <input type="hidden" name="id" value="<?php echo $post_id; ?>"></input>
             <button type="submit" class="btn btn-primary text-center">Update Review</button>
-
           </div>
         </form>
       </div>
