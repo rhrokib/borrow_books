@@ -10,9 +10,9 @@
     $con = new mysqli($servername, $username, $password);
 
     mysqli_select_db($con, 'demo');
-    $isbn = $_GET['isbn'];
+    $id = $_GET['id'];
     #echo $isbn;
-    $sql = "DELETE FROM book WHERE isbn = '$isbn'";
+    $sql = "DELETE FROM book WHERE id = $id";
     echo $sql;
     $query = mysqli_query($con, $sql);
     if ($con->query($sql) === TRUE) {

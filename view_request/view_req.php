@@ -87,6 +87,9 @@
         <button class="btn"> <a class = "rating" href="..\view_request\view_req.php">My Request</a> </button>
         <button class="btn"> <a class = "rating" href="..\donate\donate.php">Donate</a> </button>
         <button class="btn"> <a class = "rating" href="..\my_book\book_view.php">My Book</a> </button>
+        <button class="btn"> <a class="rating" href="..\book\book.php">Book Page</a> </button>
+        <button class="btn"> <a class="rating" href="..\profile">Profile</a> </button>
+		<button class="btn"> <a class="rating" href="..\review">Review</a> </button>
         <button class="btn"> <a class = "rating" href="..\logout\logout.php">Log Out</a> </button>
         <style>
 			.btn{

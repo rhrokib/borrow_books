@@ -11,8 +11,8 @@
 
     mysqli_select_db($con, 'demo');
 
-    $isbn = $_GET['isbn'];
-    echo $isbn;
+    $id = $_GET['id'];
+    echo $id;
 
     if(isset($_POST['submit'])){
         $name = $_POST['name'];
@@ -32,7 +32,7 @@
             #echo "$desfile";
             move_uploaded_file($filepath, $desfile);
             
-            $sql = "UPDATE book SET name = '$name', author = '$author', image = '$filename', description = '$description', time = NOW(), isDonated = '$isDonated' WHERE isbn = '$isbn'";
+            $sql = "UPDATE book SET name = '$name', author = '$author', image = '$filename', description = '$description', time = NOW(), isDonated = '$isDonated' WHERE id = $id";
             #echo $sql;
             $query = mysqli_query($con, $sql);
             
@@ -45,7 +45,7 @@
         }
         else{
             
-            $sql = "UPDATE book SET name = '$name', author = '$author', description = '$description', time = NOW(), isDonated = '$isDonated' WHERE isbn = '$isbn'";
+            $sql = "UPDATE book SET name = '$name', author = '$author', description = '$description', time = NOW(), isDonated = '$isDonated' WHERE id = $id";
             #echo $sql;
             $query = mysqli_query($con, $sql);
             

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2021 at 09:22 PM
+-- Generation Time: Jun 17, 2021 at 11:26 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -49,8 +49,8 @@ INSERT INTO `admin` (`username`, `password`) VALUES
 CREATE TABLE `book` (
   `id` int(13) NOT NULL,
   `isbn` varchar(13) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `author` varchar(30) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `author` varchar(50) NOT NULL,
   `Total_like` int(10) NOT NULL DEFAULT 0,
   `total_dislike` int(10) NOT NULL DEFAULT 0,
   `borrowed_to` varchar(30) NOT NULL,
@@ -61,6 +61,18 @@ CREATE TABLE `book` (
   `cost` double NOT NULL DEFAULT 50,
   `isDonated` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `book`
+--
+
+INSERT INTO `book` (`id`, `isbn`, `name`, `author`, `Total_like`, `total_dislike`, `borrowed_to`, `image`, `description`, `time`, `username`, `cost`, `isDonated`) VALUES
+(7, '9788435001915', 'The Forever War', 'Joe Haldeman', 0, 0, '', 'Screenshot_1.jpg', 'The condition is good and the comic is superb.', '2021-06-13 16:44:32', 'rhrokib', 50, 'No'),
+(8, '9789845021272', 'দেয়াল', 'হুমায়ূন আহমেদ', 0, 0, '', 'deyal.jpeg', 'অসাধারণ একটি বই । ', '2021-06-13 16:47:36', 'rhrokib', 50, 'Yes'),
+(9, '9781441715333', 'Uncle Toms Cabin', 'Harriet Beecher Stowe', 0, 0, '', 'utc.jpg', 'An amazing novel', '2021-06-13 16:53:43', 'rhrokib', 50, 'Yes'),
+(10, '9632587411537', 'I Hate PHP', 'Roqibul Islam', 0, 0, '', 'poorPHP.jpg', 'A good read for those who hate PHP for no reason.', '2021-06-13 17:03:45', 'abeed', 50, 'Yes'),
+(11, '9632587423148', 'মেয়েরা যেমন হয়', 'সমরেশ মজুমদার', 0, 0, '', 'Meyera-Jemon-Hoy.jpg', 'Self-explanatory', '2021-06-13 17:11:05', 'abeed', 50, 'No'),
+(12, '9632587110156', 'The Da Vinci Code', 'Dan Brown', 0, 0, '', 'e5498395498dc9e4ed924f4b82da54c4.jpg', '💙💜🤎', '2021-06-13 17:19:19', 'abeed', 50, 'No');
 
 -- --------------------------------------------------------
 
@@ -123,11 +135,10 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`trxid`, `amount`, `method`, `time`, `status`, `username`) VALUES
-(1, 1000, 'bKash', '2021-06-10 16:28:45', 'Accepted', 'rhrokib'),
-(2, 1000, 'bKash', '2021-06-10 17:49:07', 'Accepted', 'rhrokib'),
-(3, 500, 'bKash', '2021-06-10 17:50:04', 'Accepted', 'rhrokib'),
-(4, 100, 'bKash', '2021-06-10 17:50:06', 'Accepted', 'rhrokib'),
-(5, 500, 'bKash', '2021-06-11 02:20:09', 'Accepted', 'rhrokib');
+(6, 100, 'bKash', '2021-06-13 16:57:56', 'Accepted', 'abeed'),
+(7, 500, 'bKash', '2021-06-13 16:58:01', 'Not Accepted', 'abeed'),
+(8, 1000, 'bKash', '2021-06-13 16:58:52', 'Not Accepted', 'abeed'),
+(9, 1000, 'Paypal', '2021-06-13 17:00:44', 'Accepted', 'rhrokib');
 
 -- --------------------------------------------------------
 
@@ -146,6 +157,15 @@ CREATE TABLE `post` (
   `time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`id`, `username`, `title`, `description_text`, `loved`, `book_name`, `book_author`, `time`) VALUES
+(8, 'abeed', '**** Title that will get reported', 'The key to The DaVinci Code is that it&#039;s filled with startling plot twists, and almost every chapter ends with a &#039;&#039;cliffhanger,&#039;&#039; so you have to keep reading to see what will happen. Using this formula, I wrote the following blockbuster novel, titled The Constitution Conundrum. It&#039;s fairly short now, but when I get a huge publishing contract, I&#039;ll flesh it out to 100,000 words by adding sentences.\r\n\r\nCHAPTER ONE: Handsome yet unmarried historian Hugh Heckman stood in the National Archives Building in Washington, D.C., squinting through the bulletproof glass at the U.S. Constitution. Suddenly, he made an amazing discovery.', 5, 'The Da Vinci Code', 'Dan Brown', '2021-06-13 17:21:35'),
+(9, 'rhrokib', 'ইতিহাস যখন উপন্যাস', 'ভারতীয় উপমহাদেশে মুঘলদের ইতিহাস এক উত্থান-পতনের ইতিহাস। এখানে যেমন বাবরের জয়ের ইতিহাস রয়েছে, তেমন হুমায়ুনের পরাজয় এবং শাহজাহানের ভালোবাসারও অমর ইতিহাস রয়েছে। বিভিন্ন ঐতিহাসিক, কবি-সাহিত্যিকরা মনের মতো করে সাজিয়ে লেখেছেন তাদের জীবন ও কর্ম। বিশিষ্ট কথাসাহিত্যিক হুমায়ূন আহমেদও জীবনের শেষ প্রান্তে এসে লেখেছিলেন ‘বাদশাহ নামদার’ শিরোনামে একটি উপন্যাস। বইটি পাঠকদের কাছে যেমন সুপাঠ্য, তেমন গবেষকদের কাছেও ঐতিহাসিক দলিল হিসেবে সমাদৃত।', 5, 'বাদশাহ নামদার', 'হুমায়ূন আহমেদ', '2021-06-17 14:46:54'),
+(10, 'rhrokib', 'Masterpiece Mystery Thriller', 'The Da Vinci Code follows &quot;symbologist&quot; Robert Langdon and cryptologist Sophie Neveu after a murder in the Louvre Museum in Paris cause them to become involved in a battle between the Priory of Sion and Opus Dei over the possibility of Jesus Christ and Mary Magdalene having had a child together.', 4, 'The Da Vinci Code', 'Dan Brown', '2021-06-17 14:49:20');
+
 -- --------------------------------------------------------
 
 --
@@ -158,6 +178,13 @@ CREATE TABLE `report` (
   `time` datetime NOT NULL,
   `text` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `report`
+--
+
+INSERT INTO `report` (`id`, `post_id`, `time`, `text`) VALUES
+(35, 8, '2021-06-13 17:22:24', 'I&#039;m offended by the title 🙄🙄🙄');
 
 -- --------------------------------------------------------
 
@@ -174,6 +201,18 @@ CREATE TABLE `request` (
   `book_id` int(13) DEFAULT NULL,
   `deliveryManid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `request`
+--
+
+INSERT INTO `request` (`reqId`, `requester_name`, `time`, `accepted`, `username`, `book_id`, `deliveryManid`) VALUES
+(31, 'abeed', '2021-06-13 17:19:28', 'Declined', 'rhrokib', 7, 0),
+(32, 'abeed', '2021-06-13 17:19:29', 'Declined', 'rhrokib', 8, 0),
+(33, 'abeed', '2021-06-13 17:19:29', 'processing', 'rhrokib', 9, 0),
+(34, 'rhrokib', '2021-06-13 17:19:33', 'processing', 'abeed', 10, 0),
+(35, 'rhrokib', '2021-06-13 17:19:34', 'processing', 'rhrokib', 9, 0),
+(36, 'rhrokib', '2021-06-13 17:19:35', 'On the way', 'abeed', 10, 3);
 
 -- --------------------------------------------------------
 
@@ -202,7 +241,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `email`, `password`, `firstname`, `lastname`, `phone`, `location`, `city`, `totalCredit`, `totalRead`, `totalGiven`, `rating`, `dp_path`) VALUES
-('rhrokib', 'rokib.hridoy@gmail.com', '276d3aff1f878eacf9f36f7b78cacaf8', 'Rokibul', 'Islam', '01521433870', 'Noyapara', 'Jamalpur, Dhaka', 4200, 0, 0, 0, './../media/profile_picture/download.jpg');
+('abeed', 'abeed@asteroid.com', 'b62a565853f37fb1ec1efc287bfcebf9', 'Abeedul', 'Kadir', '01521433871', 'Notunbazar, Vatara', 'abeed', 700, 0, 0, 0, './../media/profile_picture/place.png'),
+('rhrokib', 'rokib.hridoy@gmail.com', 'b62a565853f37fb1ec1efc287bfcebf9', 'Roqibul', 'Islam', '01521433870', 'Noyapara', 'Jamalpur, Dhaka', 1000, 0, 0, 0, './../media/profile_picture/DP.jpg');
 
 --
 -- Indexes for dumped tables
@@ -273,7 +313,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `id` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `delivery`
@@ -291,25 +331,25 @@ ALTER TABLE `deliveryman`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `trxid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `trxid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `request`
 --
 ALTER TABLE `request`
-  MODIFY `reqId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `reqId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Constraints for dumped tables

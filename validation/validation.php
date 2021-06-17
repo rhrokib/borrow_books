@@ -20,7 +20,7 @@
 
 	$sql = "SELECT username, password FROM user";
 	$result = $con->query($sql);
-	echo "input: " . $name . " " . md5($pass) . " " . "<br>";
+	echo "input: " . $name . " " . $pass . " " . "<br>";
 
 	if ($result->num_rows > 0) {
 	// output data of each row
