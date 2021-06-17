@@ -55,7 +55,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
           <li class="main-nav__item"><a href="./../review/">Review</a></li>
           <li class="main-nav__item"><a href="./">Credit</a></li>
           <li class="main-nav__item"><a href="./../profile/">Profile</a></li>
-          <li class="main-nav__item nav-logout"><a href="./../demo_logout.php">logout</a></li>
+          <li class="main-nav__item nav-logout"><a href="./../logout/logout.php">logout</a></li>
         </ul>
       </nav>
     </header>
@@ -68,9 +68,9 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
           <label class="input-group-text" for="payment-method">Select Method</label>
           <select class="form-select" id="payment-method" , name="payment-method">
             <option selected>bKash</option>
-            <option value="1">Rockect</option>
-            <option value="2">Nagod</option>
-            <option value="3">UCash</option>
+            <option value="DBBL">Rockect</option>
+            <option value="Nagod">Nagod</option>
+            <option value="Paypal">Paypal</option>
           </select>
         </div>
 

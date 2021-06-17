@@ -53,7 +53,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
           <li class="main-nav__item"><a href="./../review/">Review</a></li>
           <li class="main-nav__item"><a href="./../payment/">Credit</a></li>
           <li class="main-nav__item"><a href="./">Profile</a></li>
-          <li class="main-nav__item nav-logout"><a href="./../demo_logout.php">logout</a></li>
+          <li class="main-nav__item nav-logout"><a href="./../logout/logout.php">logout</a></li>
         </ul>
       </nav>
     </header>
@@ -120,6 +120,8 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
                 <label for="newPass" class="form-label">New Password</label>
                 <input type="password" class="form-control" autocomplete="off" id="newPass" name="newPass">
               </div>
+
+
               <div class="col-md-6">
                 <label for="newPass1" class="form-label">Confirm New Password</label>
                 <input type="password" class="form-control" autocomplete="off" id="newPass1" name="newPass1">

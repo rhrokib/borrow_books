@@ -45,7 +45,7 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
           <li class="main-nav__item"><a href="./../review/">Review</a></li>
           <li class="main-nav__item"><a href="./../payment/">Credit</a></li>
           <li class="main-nav__item"><a href="./../profile/">Profile</a></li>
-          <li class="main-nav__item nav-logout"><a href="./../demo_logout.php">logout</a></li>
+          <li class="main-nav__item nav-logout"><a href="./../logout/logout.php">logout</a></li>
         </ul>
       </nav>
     </header>

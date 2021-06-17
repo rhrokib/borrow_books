@@ -20,7 +20,6 @@ if (!isset($_SESSION['user']) &&  empty($_SESSION['user'])) {
 
       try {
         $pdo->exec("INSERT INTO payment VALUES(NULL, $amount_, '$method', now(), 'Not Accepted','$username');");
-        $pdo->exec("UPDATE user SET totalCredit = $totalCredit WHERE username = '$username'");
         $alert = "?alert=success";
         redirect("./", $alert);
 
